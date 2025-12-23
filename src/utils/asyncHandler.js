@@ -7,3 +7,7 @@ const asyncHandler = (requestHandler) => {
 
 
 export {asyncHandler}
+
+
+
+// this is just an advanced version of try catch block
