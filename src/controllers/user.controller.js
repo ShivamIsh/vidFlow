@@ -143,7 +143,7 @@ const loginUser = asyncHandler(async (req, res) => {
     }
     const {accessToken, refreshToken} =  await generateAccessAndRefreshTokens(user._id)
 
-    const loggedInUser = await User.findById(user._id).select("=password -refreshToken")
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 
     const options = {
         httpOnly: true,
@@ -300,7 +300,7 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
 
     return res.status(200)
     .json(
-        new ApiResponse(200, {user}, "avatar image updated successfully")
+        new ApiResponse(200, avatar.url , "avatar image updated successfully")
     )
 
 })
@@ -328,7 +328,7 @@ const updateUserCoverImage = asyncHandler(async(req, res) => {
 
     return res.status(200)
     .json(
-        new ApiResponse(200, {user}, "coverImage updated successfully")
+        new ApiResponse(200, coverImage.url, "coverImage updated successfully")
     )
 
 })
@@ -476,7 +476,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     ])
 
     return res.status(200).json(
-        new ApiResponse(200, user[0].watchhistory, "watch history fetched successfully")
+        new ApiResponse(200, user[0]?.watchHistory, "watch history fetched successfully")
     )
 })
 
@@ -492,7 +492,9 @@ export {
     updateUserCoverImage,
     getUserChannelProfile,
     getWatchHistory
-
 }
+
+
+
 
 
